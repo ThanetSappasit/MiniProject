@@ -471,3 +471,7 @@ C:\Code\MiniProjectCross\MiniProjectRegister\obj\Debug\net9.0-windows10.0.19041.
 C:\Code\MiniProjectCross\MiniProjectRegister\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\MultipleQualifiersPerDimensionFound.txt
 C:\Code\MiniProjectCross\MiniProjectRegister\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\CommunityToolkit.Mvvm.dll
 C:\Code\MiniProjectCross\MiniProjectRegister\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\Newtonsoft.Json.dll
+C:\Code\MiniProjectCross\MiniProjectRegister\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\course.json
+C:\Code\MiniProjectCross\MiniProjectRegister\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\register.json
+C:\Code\MiniProjectCross\MiniProjectRegister\bin\Debug\net9.0-windows10.0.19041.0\win10-x64\user.json
+C:\Code\MiniProjectCross\MiniProjectRegister\obj\Debug\net9.0-windows10.0.19041.0\win10-x64\MiniProjectRegister.sourcelink.json

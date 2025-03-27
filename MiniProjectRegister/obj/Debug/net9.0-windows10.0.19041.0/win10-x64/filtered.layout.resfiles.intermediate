@@ -58,4 +58,7 @@ splashSplashScreen.scale-150.png
 splashSplashScreen.scale-200.png
 splashSplashScreen.scale-400.png
 AboutAssets.txt
+course.json
+register.json
+user.json
 runtimes\win-x64\native\WebView2Loader.dll
