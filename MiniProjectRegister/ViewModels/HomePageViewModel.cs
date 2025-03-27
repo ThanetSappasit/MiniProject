@@ -110,4 +110,5 @@ public partial class HomePageViewModel : ObservableObject
         Debug.WriteLine($"ออกจากระบบ");
         await Shell.Current.Navigation.PopAsync();
     }
+
 }

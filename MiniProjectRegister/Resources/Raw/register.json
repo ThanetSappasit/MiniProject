@@ -4,15 +4,15 @@
       "name": "Alice Johnson",
       "terms": [
         {
-          "term": "Term 1",
+          "term": "1",
           "courses": ["CS101", "MATH101", "ENG101", "PHY101"]
         },
         {
-          "term": "Term 2",
+          "term": "2",
           "courses": ["CS102", "MATH102", "ENG102", "PHY102", "HIST101"]
         },
         {
-          "term": "Term 3",
+          "term": "3",
           "courses": ["CS201", "MATH201", "ENG201", "CHEM101"]
         }
       ]
@@ -22,15 +22,15 @@
       "name": "Bob Smith",
       "terms": [
         {
-          "term": "Term 1",
+          "term": "1",
           "courses": ["CS101", "MATH101", "ENG101", "BIO101"]
         },
         {
-          "term": "Term 2",
+          "term": "2",
           "courses": ["CS102", "MATH102", "PHY102", "HIST101"]
         },
         {
-          "term": "Term 3",
+          "term": "3",
           "courses": ["CS201", "MATH201", "CHEM101", "ENG201", "STAT101"]
         }
       ]
@@ -40,15 +40,15 @@
       "name": "Clara Lee",
       "terms": [
         {
-          "term": "Term 1",
+          "term": "1",
           "courses": ["CS101", "MATH101", "PHY101", "ENG101"]
         },
         {
-          "term": "Term 2",
+          "term": "2",
           "courses": ["CS102", "MATH102", "ENG102", "BIO101", "HIST101"]
         },
         {
-          "term": "Term 3",
+          "term": "3",
           "courses": ["CS201", "CHEM101", "MATH201", "STAT101"]
         }
       ]
@@ -58,15 +58,15 @@
       "name": "David Kim",
       "terms": [
         {
-          "term": "Term 1",
+          "term": "1",
           "courses": ["CS101", "MATH101", "ENG101", "PHY101"]
         },
         {
-          "term": "Term 2",
+          "term": "2",
           "courses": ["CS102", "MATH102", "PHY102", "HIST101", "ENG102"]
         },
         {
-          "term": "Term 3",
+          "term": "3",
           "courses": ["CS201", "MATH201", "CHEM101", "STAT101"]
         }
       ]
@@ -76,15 +76,15 @@
       "name": "Emma Brown",
       "terms": [
         {
-          "term": "Term 1",
+          "term": "1",
           "courses": ["CS101", "MATH101", "ENG101", "BIO101", "PHY101"]
         },
         {
-          "term": "Term 2",
+          "term": "2",
           "courses": ["CS102", "MATH102", "ENG102", "HIST101"]
         },
         {
-          "term": "Term 3",
+          "term": "3",
           "courses": ["CS201", "MATH201", "CHEM101", "STAT101"]
         }
       ]

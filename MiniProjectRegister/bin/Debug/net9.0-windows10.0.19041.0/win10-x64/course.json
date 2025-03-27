@@ -1,23 +1,242 @@
 [
-    {"code": "CS101", "name": "Introduction to Computer Science", "year": 1},
-    {"code": "CS102", "name": "Data Structures", "year": 1},
-    {"code": "CS201", "name": "Algorithms", "year": 2},
-    {"code": "MATH101", "name": "Calculus I", "year": 1},
-    {"code": "MATH102", "name": "Calculus II", "year": 1},
-    {"code": "MATH201", "name": "Linear Algebra", "year": 2},
-    {"code": "ENG101", "name": "English Composition", "year": 1},
-    {"code": "ENG102", "name": "Technical Writing", "year": 1},
-    {"code": "ENG201", "name": "Literature Studies", "year": 2},
-    {"code": "PHY101", "name": "Physics I", "year": 1},
-    {"code": "PHY102", "name": "Physics II", "year": 1},
-    {"code": "BIO101", "name": "Introduction to Biology", "year": 1},
-    {"code": "CHEM101", "name": "General Chemistry", "year": 2},
-    {"code": "HIST101", "name": "World History", "year": 1},
-    {"code": "STAT101", "name": "Statistics I", "year": 2},
-    {"code": "CS301", "name": "Operating Systems", "year": 3},
-    {"code": "CS401", "name": "Machine Learning", "year": 4},
-    {"code": "MATH301", "name": "Differential Equations", "year": 3},
-    {"code": "PHY201", "name": "Quantum Mechanics", "year": 2},
-    {"code": "ECON101", "name": "Microeconomics", "year": 1},
-    {"code": "PSY101", "name": "Introduction to Psychology", "year": 1}
-  ]
+  {
+    "courseid": "CS101",
+    "coursename": "Introduction to Computer Science",
+    "year": 1,
+    "term": 1,
+    "instructor": "Instructor A",
+    "credits": 3
+  },
+  {
+    "courseid": "CS101",
+    "coursename": "Introduction to Computer Science",
+    "year": 1,
+    "term": 2,
+    "instructor": "Instructor A",
+    "credits": 3
+  },
+  {
+    "courseid": "CS101",
+    "coursename": "Introduction to Computer Science",
+    "year": 1,
+    "term": 3,
+    "instructor": "Instructor A",
+    "credits": 3
+  },
+  {
+    "courseid": "CS102",
+    "coursename": "Data Structures",
+    "year": 1,
+    "term": 2,
+    "instructor": "Instructor B",
+    "credits": 3
+  },
+  {
+    "courseid": "CS102",
+    "coursename": "Data Structures",
+    "year": 1,
+    "term": 3,
+    "instructor": "Instructor B",
+    "credits": 3
+  },
+  {
+    "courseid": "CS201",
+    "coursename": "Algorithms",
+    "year": 2,
+    "term": 3,
+    "instructor": "Instructor C",
+    "credits": 3
+  },
+  {
+    "courseid": "MATH101",
+    "coursename": "Calculus I",
+    "year": 1,
+    "term": 1,
+    "instructor": "Instructor D",
+    "credits": 3
+  },
+  {
+    "courseid": "MATH101",
+    "coursename": "Calculus I",
+    "year": 1,
+    "term": 2,
+    "instructor": "Instructor D",
+    "credits": 3
+  },
+  {
+    "courseid": "MATH101",
+    "coursename": "Calculus I",
+    "year": 1,
+    "term": 3,
+    "instructor": "Instructor D",
+    "credits": 3
+  },
+  {
+    "courseid": "MATH102",
+    "coursename": "Calculus II",
+    "year": 1,
+    "term": 2,
+    "instructor": "Instructor E",
+    "credits": 3
+  },
+  {
+    "courseid": "MATH102",
+    "coursename": "Calculus II",
+    "year": 1,
+    "term": 3,
+    "instructor": "Instructor E",
+    "credits": 3
+  },
+  {
+    "courseid": "MATH201",
+    "coursename": "Linear Algebra",
+    "year": 2,
+    "term": 3,
+    "instructor": "Instructor F",
+    "credits": 3
+  },
+  {
+    "courseid": "ENG101",
+    "coursename": "English Composition",
+    "year": 1,
+    "term": 1,
+    "instructor": "Instructor G",
+    "credits": 3
+  },
+  {
+    "courseid": "ENG101",
+    "coursename": "English Composition",
+    "year": 1,
+    "term": 2,
+    "instructor": "Instructor G",
+    "credits": 3
+  },
+  {
+    "courseid": "ENG102",
+    "coursename": "Technical Writing",
+    "year": 1,
+    "term": 2,
+    "instructor": "Instructor H",
+    "credits": 2
+  },
+  {
+    "courseid": "ENG102",
+    "coursename": "Technical Writing",
+    "year": 1,
+    "term": 3,
+    "instructor": "Instructor H",
+    "credits": 2
+  },
+  {
+    "courseid": "ENG201",
+    "coursename": "Literature Studies",
+    "year": 2,
+    "term": 3,
+    "instructor": "Instructor I",
+    "credits": 3
+  },
+  {
+    "courseid": "PHY101",
+    "coursename": "Physics I",
+    "year": 1,
+    "term": 1,
+    "instructor": "Instructor J",
+    "credits": 3
+  },
+  {
+    "courseid": "PHY102",
+    "coursename": "Physics II",
+    "year": 1,
+    "term": 2,
+    "instructor": "Instructor K",
+    "credits": 3
+  },
+  {
+    "courseid": "BIO101",
+    "coursename": "Introduction to Biology",
+    "year": 1,
+    "term": 1,
+    "instructor": "Instructor L",
+    "credits": 3
+  },
+  {
+    "courseid": "BIO101",
+    "coursename": "Introduction to Biology",
+    "year": 1,
+    "term": 2,
+    "instructor": "Instructor L",
+    "credits": 3
+  },
+  {
+    "courseid": "CHEM101",
+    "coursename": "General Chemistry",
+    "year": 2,
+    "term": 3,
+    "instructor": "Instructor M",
+    "credits": 3
+  },
+  {
+    "courseid": "HIST101",
+    "coursename": "World History",
+    "year": 1,
+    "term": 2,
+    "instructor": "Instructor N",
+    "credits": 3
+  },
+  {
+    "courseid": "STAT101",
+    "coursename": "Statistics I",
+    "year": 2,
+    "term": 3,
+    "instructor": "Instructor O",
+    "credits": 3
+  },
+  {
+    "courseid": "CS301",
+    "coursename": "Operating Systems",
+    "year": 3,
+    "term": 2,    
+    "instructor": "Instructor P",
+    "credits": 3
+  },
+  {
+    "courseid": "CS401",
+    "coursename": "Machine Learning",
+    "year": 4,
+    "term": 1,    
+    "instructor": "Instructor Q",
+    "credits": 3
+  },
+  {
+    "courseid": "MATH301",
+    "coursename": "Differential Equations",
+    "year": 3,
+    "term": 2,    
+    "instructor": "Instructor R",
+    "credits": 3
+  },
+  {
+    "courseid": "PHY201",
+    "coursename": "Quantum Mechanics",
+    "year": 2,
+    "term": 2,    
+    "instructor": "Instructor S",
+    "credits": 3
+  },
+  {
+    "courseid": "ECON101",
+    "coursename": "Microeconomics",
+    "year": 1,
+    "term": 2,    
+    "instructor": "Instructor T",
+    "credits": 2
+  },
+  {
+    "courseid": "PSY101",
+    "coursename": "Introduction to Psychology",
+    "year": 1,
+    "term": 2,    
+    "instructor": "Instructor U",
+    "credits": 2
+  }
+]

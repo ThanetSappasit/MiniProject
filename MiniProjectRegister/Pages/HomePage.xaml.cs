@@ -1,11 +1,12 @@
 using Microsoft.Maui.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using MiniProjectRegister.ViewModels;
+using System.Diagnostics;
 
 namespace MiniProjectRegister.Pages;
 
 // ใช้ QueryProperty กับ Email
-[QueryProperty(nameof(Email), "Email")]
+[QueryProperty(nameof(Email), "email")]
 public partial class HomePage : ContentPage
 {
     private string _email = string.Empty;
@@ -27,12 +28,15 @@ public partial class HomePage : ContentPage
     public HomePage()
     {
         InitializeComponent();
+        BindingContext = new HomePageViewModel(); // ตรวจสอบให้แน่ใจว่า ViewModel ถูกตั้งค่า
     }
 
     private void UpdateBindingContext()
     {
-        // บันทึกข้อมูล Email สำหรับตรวจสอบ
-        System.Diagnostics.Debug.WriteLine($"กำลังตั้งค่า BindingContext ด้วย Email: {Email}");
-        BindingContext = new HomePageViewModel(Email);
+        if (BindingContext is HomePageViewModel viewModel)
+        {
+            Debug.WriteLine($"กำลังอัปเดต Email ใน ViewModel: {Email}");
+            viewModel.Email = Email;
+        }
     }
 }

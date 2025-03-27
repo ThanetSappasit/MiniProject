@@ -17,14 +17,23 @@ namespace MauiApp1.Model
 
     public partial class Course
     {
-        [JsonProperty("code")]
-        public string Code { get; set; }
+        [JsonProperty("courseid")]
+        public string Courseid { get; set; }
 
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("coursename")]
+        public string Coursename { get; set; }
 
         [JsonProperty("year")]
         public long Year { get; set; }
+
+        [JsonProperty("term")]
+        public long Term { get; set; }
+
+        [JsonProperty("instructor")]
+        public string Instructor { get; set; }
+
+        [JsonProperty("credits")]
+        public long Credits { get; set; }
     }
 
     public partial class Course

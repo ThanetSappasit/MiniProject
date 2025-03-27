@@ -67,7 +67,7 @@
                               RowSpacing="20">
                             <!-- อีเมล -->
                             <VerticalStackLayout Grid.Row="0"
-                                    Spacing="5">
+                                                 Spacing="5">
                                 <Label Text="อีเมล"
                                        TextColor="#2E4374"
                                        FontAttributes="Bold"/>
@@ -76,14 +76,15 @@
                                         StrokeThickness="1"
                                         StrokeShape="RoundRectangle 10">
                                     <Entry Placeholder="กรุณากรอกอีเมล"
+                                            TextColor="Black"
                                            Text="{Binding Email}"
-                                           PlaceholderColor="#C7C8CC"/>
+                                           PlaceholderColor="Black"/>
                                 </Border>
                             </VerticalStackLayout>
 
                             <!-- รหัสผ่าน -->
                             <VerticalStackLayout Grid.Row="1"
-                                    Spacing="5">
+                                                 Spacing="5">
                                 <Label Text="รหัสผ่าน"
                                        TextColor="#2E4374"
                                        FontAttributes="Bold"/>
@@ -92,8 +93,9 @@
                                         StrokeThickness="1"
                                         StrokeShape="RoundRectangle 10">
                                     <Entry Placeholder="กรุณากรอกรหัสผ่าน"
+                                           TextColor="Black"
                                            Text="{Binding Password}"
-                                           PlaceholderColor="#C7C8CC"
+                                           PlaceholderColor="Black"
                                            IsPassword="True"/>
                                 </Border>
                             </VerticalStackLayout>

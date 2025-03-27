@@ -3,147 +3,154 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MiniProjectRegister.Pages.RegisterPage"
              xmlns:viewmodel="clr-namespace:MiniProjectRegister.ViewModels"
-             x:DataType="viewmodel:RegisterPageViewModel"
+             xmlns:model="clr-namespace:MauiApp1.Model"
              Shell.NavBarIsVisible="False"
              Padding="20"
              BackgroundColor="#FFDEE14C"
              Title="RegisterPage">
 
     <ScrollView>
-        <Grid RowDefinitions="Auto, *"
-              ColumnDefinitions="*, *"
-              RowSpacing="20"
-              ColumnSpacing="20">
+        <Grid ColumnDefinitions="2*,*"
+              RowDefinitions="*">
+            
+            <!-- Courses Column -->
+            <CollectionView ItemsSource="{Binding Courses}"
+                            Grid.Column="0"
+                            Grid.Row="0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border StrokeShape="RoundRectangle 10"
+                                Stroke="#7C81AD"
+                                StrokeThickness="1"
+                                BackgroundColor="#F1F0E8"
+                                Margin="0,0,0,10"
+                                Padding="15">
+                            <Grid RowDefinitions="Auto, Auto"
+                                  ColumnDefinitions="*, Auto">
+                                <!-- Course Details -->
+                                <VerticalStackLayout Grid.Column="0"
+                                                     Spacing="5">
+                                    <Label Text="{Binding Coursename}"
+                                           FontAttributes="Bold"
+                                           TextColor="#2E4374"
+                                           FontSize="16"/>
+                                    <Label Text="{Binding Courseid, StringFormat='รหัสวิชา: {0}'}"
+                                           TextColor="#7C81AD"/>
+                                    <Label Text="{Binding Credits, StringFormat='หน่วยกิต: {0}'}"
+                                           TextColor="#7C81AD"/>
+                                    <Label Text="{Binding Instructor, StringFormat='อาจารย์ผู้สอน: {0}'}"
+                                           TextColor="#7C81AD"/>
+                                    <Label Text="{Binding Term, StringFormat='เทอมสอน: {0}'}"
+                                           TextColor="#7C81AD"/>
+                                    <Label Text="{Binding Year, StringFormat='ปีการศึกษา: {0}'}"
+                                           TextColor="#7C81AD"/>
+                                </VerticalStackLayout>
 
-            <!-- Header spanning both columns -->
-            <Label Text="Register for Courses"
-                   FontSize="24"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   TextColor="#2C3E50"
-                   Grid.Row="0"
-                   Grid.ColumnSpan="2"/>
+                                <!-- Select Course Button -->
+                                <Button Grid.Column="1"
+                                        Text="เลือกวิชานี้"
+                                        BackgroundColor="#7C81AD"
+                                        TextColor="White"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.AddCourseCommand}"
+                                        CommandParameter="{Binding}"
+                                        CornerRadius="10"
+                                        FontAttributes="Bold"
+                                        WidthRequest="120"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Center"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
-            <!-- Left Column: Subject Selection -->
-            <StackLayout Grid.Row="1"
-                         Grid.Column="0"
-                         Spacing="20">
-
-                <!-- Year Picker -->
-                <Border Stroke="#3498DB"
-                        StrokeThickness="1"
-                        Padding="10"
-                        BackgroundColor="#FF414141">
-                    <StackLayout>
-                        <Label Text="Academic Year"
+            <!-- Selected Courses Column -->
+            <Border Grid.Column="1"
+                    StrokeShape="RoundRectangle 15"
+                    BackgroundColor="White"
+                    Stroke="#2E4374"
+                    StrokeThickness="1"
+                    Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <!-- Selected Courses Header -->
+                    <Border BackgroundColor="#2E4374"
+                            StrokeShape="RoundRectangle 10"
+                            Padding="10,5"
+                            Margin="0,0,0,10">
+                        <Label Text="รายวิชาที่เลือก"
                                FontSize="16"
-                               TextColor="#34495E"/>
-                        <Picker Title="Select Year"
-                                FontSize="16"
-                                TextColor="#2C3E50"
-                                ItemsSource="{Binding Years}"
-                                SelectedItem="{Binding SelectedYear}"/>
-                    </StackLayout>
-                </Border>
+                               TextColor="White"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"/>
+                    </Border>
 
-                <!-- Semester Picker -->
-                <Border Stroke="#3498DB"
-                        StrokeThickness="1"
-                        Padding="10"
-                        BackgroundColor="#FF414141">
-                    <StackLayout>
-                        <Label Text="Semester"
+                    <!-- Selected Courses List -->
+                    <CollectionView ItemsSource="{Binding SelectedCourses}"
+                                    EmptyView="ยังไม่ได้เลือกรายวิชา"
+                                    Margin="0,0,0,10">
+                        <CollectionView.EmptyViewTemplate>
+                            <DataTemplate>
+                                <VerticalStackLayout VerticalOptions="Center"
+                                                     HorizontalOptions="Center"
+                                                     Padding="20">
+                                    <Label Text="ยังไม่ได้เลือกรายวิชา"
+                                           TextColor="#7C81AD"
+                                           FontSize="14"
+                                           HorizontalOptions="Center"/>
+                                </VerticalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.EmptyViewTemplate>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border StrokeShape="RoundRectangle 10"
+                                        Stroke="#7C81AD"
+                                        StrokeThickness="1"
+                                        BackgroundColor="#F1F0E8"
+                                        Margin="0,0,0,10"
+                                        Padding="15">
+                                    <Grid>
+                                        <VerticalStackLayout Spacing="5">
+                                            <Label Text="{Binding Coursename}"
+                                                   FontAttributes="Bold"
+                                                   TextColor="#2E4374"
+                                                   FontSize="16"/>
+                                            <Label Text="{Binding Courseid, StringFormat='รหัสวิชา: {0}'}"
+                                                   TextColor="#7C81AD"/>
+                                            <Label Text="{Binding Credits, StringFormat='หน่วยกิต: {0}'}"
+                                                   TextColor="#7C81AD"/>
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <!-- Total Credits -->
+                    <Border BackgroundColor="#F1F0E8"
+                            StrokeShape="RoundRectangle 10"
+                            Padding="15"
+                            Margin="0,5,0,15">
+                        <Label Text="{Binding TotalCredit, StringFormat='หน่วยกิตรวม: {0}'}"
+                               TextColor="#2E4374"
+                               FontAttributes="Bold"
                                FontSize="16"
-                               TextColor="#34495E"/>
-                        <Picker Title="Select Semester"
-                                FontSize="16"
-                                TextColor="#2C3E50"
-                                ItemsSource="{Binding Semesters}"
-                                SelectedItem="{Binding SelectedSemester}"/>
-                    </StackLayout>
-                </Border>
+                               HorizontalOptions="Start"/>
+                    </Border>
 
-                <!-- Course Picker -->
-                <Border Stroke="#3498DB"
-                        StrokeThickness="1"
-                        Padding="10"
-                        BackgroundColor="#FF414141">
-                    <StackLayout>
-                        <Label Text="Select Course"
-                               FontSize="16"
-                               TextColor="#34495E"/>
-                        <Picker Title="Select a Course"
-                                FontSize="16"
-                                TextColor="#2C3E50"
-                                ItemsSource="{Binding AvailableCourses}"
-                                SelectedItem="{Binding SelectedCourse}"/>
-                    </StackLayout>
-                </Border>
-
-                <!-- Add Course Button -->
-                <Button Text="Add Course"
-                        FontSize="16"
-                        BackgroundColor="#3498DB"
-                        TextColor="White"
-                        CornerRadius="10"
-                        Padding="10"
-                        HorizontalOptions="FillAndExpand"
-                        Command="{Binding AddCourseCommand}"/>
-
-            </StackLayout>
-
-            <!-- Right Column: Selected Subjects -->
-            <StackLayout Grid.Row="1"
-                         Grid.Column="1"
-                         Spacing="20">
-
-                <!-- Selected Courses List -->
-                <Border Stroke="#3498DB"
-                        StrokeThickness="1"
-                        Padding="10"
-                        BackgroundColor="White"
-                        HeightRequest="300">
-                    <StackLayout>
-                        <Label Text="Selected Courses"
-                               FontSize="16"
-                               TextColor="#34495E"/>
-                        <ScrollView>
-                            <CollectionView ItemsSource="{Binding SelectedCourses}"
-                                            EmptyView="No courses selected yet">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackLayout Orientation="Horizontal"
-                                                     Padding="5">
-                                            <Label Text="{Binding .}"
-                                                   FontSize="14"
-                                                   TextColor="#2C3E50"
-                                                   VerticalOptions="Center"
-                                                   HorizontalOptions="StartAndExpand"/>
-                                            <Button Text="Remove"
-                                                    FontSize="12"
-                                                    BackgroundColor="#E74C3C"
-                                                    TextColor="White"
-                                                    CornerRadius="5"
-                                                    HorizontalOptions="End"
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:RegisterPageViewModel}}, Path=RemoveCourseCommand}"
-                                                    CommandParameter="{Binding .}"/>
-                                        </StackLayout>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </ScrollView>
-                    </StackLayout>
-                </Border>
-
-                <!-- Submit Button -->
-                <Button Text="Submit Registration"
-                        FontSize="16"
-                        BackgroundColor="#27AE60"
-                        TextColor="White"
-                        CornerRadius="10"
-                        Padding="10"
-                        HorizontalOptions="FillAndExpand"/>
-            </StackLayout>
+                    <!-- Confirm Button -->
+                    <Button Text="ยืนยันการลงทะเบียน"
+                            BackgroundColor="#2E4374"
+                            TextColor="White"
+                            Command="{Binding ConfirmCommand}"
+                            FontAttributes="Bold"
+                            CornerRadius="10"
+                            HeightRequest="50"
+                            HorizontalOptions="Fill"
+                            VerticalOptions="End"
+                            Margin="0,10,0,0"/>
+                </VerticalStackLayout>
+            </Border>
         </Grid>
     </ScrollView>
 </ContentPage>
