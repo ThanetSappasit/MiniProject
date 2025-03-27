@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MiniProjectRegister.Pages.LoginPage"
+             Shell.NavBarIsVisible="False"
+             Title="LoginPage">
+    <ScrollView>
+        <VerticalStackLayout VerticalOptions="FillAndExpand"
+                             HorizontalOptions="FillAndExpand"
+                             BackgroundColor="#F5F5DC"
+                             Padding="20">
+            <!-- ส่วนหัวของหน้า -->
+            <Border Padding="10"
+                    BackgroundColor="White"
+                    Margin="0,0,0,30"
+                    StrokeShape="RoundRectangle 10"
+                    Stroke="#DDDDDD">
+                <Grid ColumnDefinitions="30*, 70*">
+                    <!-- โลโก้ -->
+                    <Image Source="https://ird.rmutp.ac.th/wp-content/uploads/msu.png"
+                           Grid.Column="0"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           WidthRequest="80"
+                           HeightRequest="80"/>
+
+                    <!-- ชื่อมหาวิทยาลัย -->
+                    <StackLayout Grid.Column="1"
+                                 HorizontalOptions="Start"
+                                 VerticalOptions="Center">
+                        <Label Text="มหาวิทยาลัยมหาสารคาม"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#2E4374"/>
+                        <Label Text="ระบบลงทะเบียนเรียน"
+                               FontSize="16"
+                               TextColor="#7C81AD"/>
+                    </StackLayout>
+                </Grid>
+            </Border>
+
+            <!-- ส่วนฟอร์มล็อกอิน -->
+            <StackLayout VerticalOptions="Center"
+                         HorizontalOptions="Center"
+                         Padding="20"
+                         WidthRequest="400">
+                <Border Stroke="#2E4374"
+                        StrokeThickness="2"
+                        StrokeShape="RoundRectangle 20"
+                        Padding="25"
+                        BackgroundColor="White">
+                    <VerticalStackLayout Spacing="25">
+                        <!-- หัวข้อ -->
+                        <Border BackgroundColor="#2E4374"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="10,5"
+                                Margin="0,0,0,10">
+                            <Label Text="เข้าสู่ระบบ"
+                                   FontSize="20"
+                                   TextColor="White"
+                                   FontAttributes="Bold"
+                                   HorizontalOptions="Center"/>
+                        </Border>
+
+                        <!-- ฟอร์มอินพุต -->
+                        <Grid RowDefinitions="Auto, Auto"
+                              RowSpacing="20">
+                            <!-- อีเมล -->
+                            <VerticalStackLayout Grid.Row="0"
+                                    Spacing="5">
+                                <Label Text="อีเมล"
+                                       TextColor="#2E4374"
+                                       FontAttributes="Bold"/>
+                                <Border Padding="15,0"
+                                        Stroke="#7C81AD"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 10">
+                                    <Entry Placeholder="กรุณากรอกอีเมล"
+                                           Text="{Binding Email}"
+                                           PlaceholderColor="#C7C8CC"/>
+                                </Border>
+                            </VerticalStackLayout>
+
+                            <!-- รหัสผ่าน -->
+                            <VerticalStackLayout Grid.Row="1"
+                                    Spacing="5">
+                                <Label Text="รหัสผ่าน"
+                                       TextColor="#2E4374"
+                                       FontAttributes="Bold"/>
+                                <Border Padding="15,0"
+                                        Stroke="#7C81AD"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 10">
+                                    <Entry Placeholder="กรุณากรอกรหัสผ่าน"
+                                           Text="{Binding Password}"
+                                           PlaceholderColor="#C7C8CC"
+                                           IsPassword="True"/>
+                                </Border>
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <!-- ปุ่มล็อกอิน -->
+                        <Button Text="เข้าสู่ระบบ"
+                                WidthRequest="200"
+                                HeightRequest="50"
+                                BackgroundColor="#2E4374"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                Command="{Binding LoginCommand}"
+                                CornerRadius="25"
+                                HorizontalOptions="Center"/>
+
+                        <!-- ลิงก์ช่วยเหลือ -->
+                        <HorizontalStackLayout HorizontalOptions="Center"
+                                               Spacing="90">
+                            <Label Text="ลืมรหัสผ่าน?"
+                                   TextColor="#7C81AD"
+                                   FontSize="14"
+                                   TextDecorations="Underline">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label Text="ลงทะเบียน"
+                                   TextColor="#7C81AD"
+                                   FontSize="14"
+                                   TextDecorations="Underline">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding RegisterCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </Border>
+            </StackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
