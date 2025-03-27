@@ -1,0 +1,92 @@
+[
+    {
+      "user_id": "U001",
+      "name": "Alice Johnson",
+      "terms": [
+        {
+          "term": "Term 1",
+          "courses": ["CS101", "MATH101", "ENG101", "PHY101"]
+        },
+        {
+          "term": "Term 2",
+          "courses": ["CS102", "MATH102", "ENG102", "PHY102", "HIST101"]
+        },
+        {
+          "term": "Term 3",
+          "courses": ["CS201", "MATH201", "ENG201", "CHEM101"]
+        }
+      ]
+    },
+    {
+      "user_id": "U002",
+      "name": "Bob Smith",
+      "terms": [
+        {
+          "term": "Term 1",
+          "courses": ["CS101", "MATH101", "ENG101", "BIO101"]
+        },
+        {
+          "term": "Term 2",
+          "courses": ["CS102", "MATH102", "PHY102", "HIST101"]
+        },
+        {
+          "term": "Term 3",
+          "courses": ["CS201", "MATH201", "CHEM101", "ENG201", "STAT101"]
+        }
+      ]
+    },
+    {
+      "user_id": "U003",
+      "name": "Clara Lee",
+      "terms": [
+        {
+          "term": "Term 1",
+          "courses": ["CS101", "MATH101", "PHY101", "ENG101"]
+        },
+        {
+          "term": "Term 2",
+          "courses": ["CS102", "MATH102", "ENG102", "BIO101", "HIST101"]
+        },
+        {
+          "term": "Term 3",
+          "courses": ["CS201", "CHEM101", "MATH201", "STAT101"]
+        }
+      ]
+    },
+    {
+      "user_id": "U004",
+      "name": "David Kim",
+      "terms": [
+        {
+          "term": "Term 1",
+          "courses": ["CS101", "MATH101", "ENG101", "PHY101"]
+        },
+        {
+          "term": "Term 2",
+          "courses": ["CS102", "MATH102", "PHY102", "HIST101", "ENG102"]
+        },
+        {
+          "term": "Term 3",
+          "courses": ["CS201", "MATH201", "CHEM101", "STAT101"]
+        }
+      ]
+    },
+    {
+      "user_id": "U005",
+      "name": "Emma Brown",
+      "terms": [
+        {
+          "term": "Term 1",
+          "courses": ["CS101", "MATH101", "ENG101", "BIO101", "PHY101"]
+        },
+        {
+          "term": "Term 2",
+          "courses": ["CS102", "MATH102", "ENG102", "HIST101"]
+        },
+        {
+          "term": "Term 3",
+          "courses": ["CS201", "MATH201", "CHEM101", "STAT101"]
+        }
+      ]
+    }
+  ]
