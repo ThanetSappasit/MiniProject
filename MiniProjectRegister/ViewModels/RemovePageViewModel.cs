@@ -1,7 +1,9 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MauiApp1.Model;
+using Newtonsoft.Json;
 
 namespace MiniProjectRegister.ViewModels;
 
@@ -128,9 +130,6 @@ public partial class RemovePageViewModel : ObservableObject
             return;
         }
 
-        Debug.WriteLine("\nUser Register:");
-        Debug.WriteLine($"User ID: {userRegister.UserId}");
-
         if (userRegister.Terms == null || !userRegister.Terms.Any())
         {
             Debug.WriteLine("  No terms found for the current user.");
@@ -140,24 +139,15 @@ public partial class RemovePageViewModel : ObservableObject
         var groupedCourses = new Dictionary<string, List<Course>>();
         foreach (var term in userRegister.Terms)
         {
-            // Debug.WriteLine($"  Term: {term.TermTerm}");
-            // Debug.WriteLine($"  Course IDs: {string.Join(", ", term.Courses)}");
+            // Use Distinct with a custom comparer to remove duplicate courses
+            var termCourses = Courses
+                .Where(course => term.Courses.Contains(course.Courseid))
+                .Distinct(new CourseComparer())
+                .ToList();
 
-            var termCourses = Courses.Where(course => term.Courses.Contains(course.Courseid)).ToList();
             groupedCourses[term.TermTerm] = termCourses;
-            if (termCourses.Any())
-            {
-                // Debug.WriteLine("  Course Details:");
-                foreach (var course in termCourses)
-                {
-                    // Debug.WriteLine($"    Course ID: {course.Courseid}, Name: {course.Coursename}, Instructor: {course.Instructor}, Credits: {course.Credits}");
-                }
-            }
-            else
-            {
-                // Debug.WriteLine("    No matching courses found in the Courses collection.");
-            }
         }
+
         foreach (var group in groupedCourses)
         {
             var termCourses = new TermCourses
@@ -168,7 +158,7 @@ public partial class RemovePageViewModel : ObservableObject
             TermCoursesList.Add(termCourses);
         }
 
-        // Optional: Log the final TermCoursesList for debugging
+        // Log the final TermCoursesList for debugging
         Debug.WriteLine("\nFinal TermCoursesList:");
         foreach (var term in TermCoursesList)
         {
@@ -180,4 +170,135 @@ public partial class RemovePageViewModel : ObservableObject
             }
         }
     }
+
+    private class CourseComparer : IEqualityComparer<Course>
+    {
+        public bool Equals(Course x, Course y)
+        {
+            if (ReferenceEquals(x, y)) return true;
+            if (x is null || y is null) return false;
+
+            return x.Courseid == y.Courseid &&
+                   x.Coursename == y.Coursename &&
+                   x.Instructor == y.Instructor &&
+                   x.Credits == y.Credits &&
+                   x.Year == y.Year;
+        }
+
+        public int GetHashCode(Course obj)
+        {
+            if (obj is null) return 0;
+
+            unchecked // Overflow is fine, just wrap
+            {
+                int hash = 17;
+                hash = hash * 23 + (obj.Courseid?.GetHashCode() ?? 0);
+                hash = hash * 23 + (obj.Coursename?.GetHashCode() ?? 0);
+                hash = hash * 23 + (obj.Instructor?.GetHashCode() ?? 0);
+                hash = hash * 23 + obj.Credits.GetHashCode();
+                hash = hash * 23 + obj.Year.GetHashCode();
+                return hash;
+            }
+        }
+    }
+
+    [RelayCommand]
+    private async Task RemoveCourse(Course course)
+    {
+        // Validate inputs
+        if (course == null)
+        {
+            Debug.WriteLine("Cannot remove null course.");
+            return;
+        }
+
+        if (CurrentEmail == null)
+        {
+            Debug.WriteLine("No user is currently selected.");
+            return;
+        }
+
+        // Add confirmation alert
+        bool confirm = await Application.Current.MainPage.DisplayAlert(
+            "Confirm Removal",
+            $"Are you sure you want to remove the course '{course.Coursename}'?",
+            "Yes",
+            "No");
+
+        if (!confirm)
+        {
+            Debug.WriteLine("Course removal cancelled by user.");
+            return;
+        }
+
+        try
+        {
+            // Find the user's register
+            var userRegister = Registers.FirstOrDefault(r => r.UserId == CurrentEmail.UserId);
+            if (userRegister == null)
+            {
+                Debug.WriteLine("No register found for the current user.");
+                return;
+            }
+
+            // Find the term containing this course
+            var termToModify = userRegister.Terms.FirstOrDefault(t => t.Courses.Contains(course.Courseid));
+            if (termToModify == null)
+            {
+                Debug.WriteLine($"Course {course.Coursename} not found in any term for this user.");
+                return;
+            }
+
+            // Remove the course from the term
+            termToModify.Courses.Remove(course.Courseid);
+
+            // Update the TermCoursesList and Courses collection
+            var termCoursesToRemove = TermCoursesList.FirstOrDefault(tc => tc.TermName == termToModify.TermTerm);
+            if (termCoursesToRemove != null)
+            {
+                termCoursesToRemove.Courses.Remove(course);
+            }
+
+            // Optional: Persist changes to JSON file
+            await SaveUpdatedRegisterToJson(userRegister);
+
+            // Refresh the view
+            CombineCourses();
+
+            // Optional: Show a success message
+            Debug.WriteLine($"Course {course.Coursename} removed successfully.");
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error removing course: {ex.Message}");
+        }
+    }
+
+    private async Task SaveUpdatedRegisterToJson(Register updatedRegister)
+    {
+        try
+        {
+            // Read existing registers
+            var allRegisters = await ReadRegisterJsonAsync();
+
+            // Find and replace the updated register
+            var existingRegisterIndex = allRegisters.FindIndex(r => r.UserId == updatedRegister.UserId);
+            if (existingRegisterIndex != -1)
+            {
+                allRegisters[existingRegisterIndex] = updatedRegister;
+            }
+
+            // Convert updated registers back to JSON
+            string updatedJson = JsonConvert.SerializeObject(allRegisters, Formatting.Indented);
+
+            // Write back to the file
+            string filePath = Path.Combine(FileSystem.AppDataDirectory, "register.json");
+            await File.WriteAllTextAsync(filePath, updatedJson);
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error saving updated register: {ex.Message}");
+        }
+    }
+
 }
