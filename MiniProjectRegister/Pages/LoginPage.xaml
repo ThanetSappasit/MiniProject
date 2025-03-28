@@ -5,12 +5,13 @@
              Shell.NavBarIsVisible="False"
              Title="LoginPage">
     <ScrollView>
-        <VerticalStackLayout VerticalOptions="FillAndExpand"
-                             HorizontalOptions="FillAndExpand"
-                             BackgroundColor="#F5F5DC"
-                             Padding="20">
+        <Grid RowDefinitions="Auto, *"
+              ColumnDefinitions="*"
+              BackgroundColor="#F5F5DC"
+              Padding="20">
             <!-- ส่วนหัวของหน้า -->
-            <Border Padding="10"
+            <Border Grid.Row="0"
+                    Padding="10"
                     BackgroundColor="White"
                     Margin="0,0,0,30"
                     StrokeShape="RoundRectangle 10"
@@ -40,7 +41,8 @@
             </Border>
 
             <!-- ส่วนฟอร์มล็อกอิน -->
-            <StackLayout VerticalOptions="Center"
+            <StackLayout Grid.Row="1"
+                         VerticalOptions="Center"
                          HorizontalOptions="Center"
                          Padding="20"
                          WidthRequest="400">
@@ -76,7 +78,7 @@
                                         StrokeThickness="1"
                                         StrokeShape="RoundRectangle 10">
                                     <Entry Placeholder="กรุณากรอกอีเมล"
-                                            TextColor="Black"
+                                           TextColor="Black"
                                            Text="{Binding Email}"
                                            PlaceholderColor="Black"/>
                                 </Border>
@@ -135,6 +137,6 @@
                     </VerticalStackLayout>
                 </Border>
             </StackLayout>
-        </VerticalStackLayout>
+        </Grid>
     </ScrollView>
 </ContentPage>
