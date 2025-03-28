@@ -28,6 +28,30 @@ namespace MauiApp1.Model
 
         [JsonProperty("password")]
         public string Password { get; set; }
+
+        [JsonProperty("faculty")]
+        public string Faculty { get; set; }
+
+        [JsonProperty("department")]
+        public string Department { get; set; }
+
+        [JsonProperty("year")]
+        public long Year { get; set; }
+
+        [JsonProperty("profileImage")]
+        public Uri ProfileImage { get; set; }
+
+        [JsonProperty("phoneNumber")]
+        public string PhoneNumber { get; set; }
+
+        [JsonProperty("gpa")]
+        public double Gpa { get; set; }
+
+        [JsonProperty("enrollment_year")]
+        public long EnrollmentYear { get; set; }
+
+        [JsonProperty("Advisor")]
+        public string Advisor { get; set; }
     }
 
     public partial class User

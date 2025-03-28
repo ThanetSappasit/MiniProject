@@ -300,5 +300,9 @@ public partial class RemovePageViewModel : ObservableObject
             Debug.WriteLine($"Error saving updated register: {ex.Message}");
         }
     }
-
+    [RelayCommand]
+    async Task GoBack()
+    {
+        await Shell.Current.Navigation.PopAsync();
+    }
 }

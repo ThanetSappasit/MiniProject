@@ -3,185 +3,142 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MiniProjectRegister.Pages.HomePage"
              Shell.NavBarIsVisible="False"
-             Title="HomePage">
+             Title="HomePage"
+             BackgroundColor="#F5F5DC">
     <ScrollView>
-        <VerticalStackLayout VerticalOptions="FillAndExpand"
-                             HorizontalOptions="FillAndExpand"
-                             BackgroundColor="#F5F5DC"
-                             Padding="20">
-
-            <!-- ส่วนหัวของหน้า -->
-            <Grid ColumnDefinitions="30*, 70*"
-                  Padding="10"
-                  BackgroundColor="White"
-                  Margin="0,0,0,15">
-                <Image Source="https://ird.rmutp.ac.th/wp-content/uploads/msu.png"
-                       Grid.Column="0"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       WidthRequest="80"
-                       HeightRequest="80"/>
-                <StackLayout Grid.Column="1"
-                             HorizontalOptions="Start"
-                             VerticalOptions="Center">
-                    <Label Text="มหาวิทยาลัยมหาสารคาม"
-                           FontSize="20"
-                           FontAttributes="Bold"
-                           TextColor="#2E4374"/>
-                    <Label Text="ระบบลงทะเบียนเรียน"
-                           FontSize="16"
-                           TextColor="#7C81AD"/>
-                </StackLayout>
-            </Grid>
-
-            <!-- เมนูหลัก -->
-            <Grid ColumnDefinitions="20*, 80*"
-                  Padding="10"
-                  BackgroundColor="White"
-                  Margin="0,0,0,15">
-                <Border Grid.Column="0"
-                        BackgroundColor="#2E4374"
-                        StrokeShape="RoundRectangle 10"
-                        Padding="5">
-                    <Label Text="🏠 หน้าหลัก"
-                           FontSize="16"
-                           TextColor="White"
-                           FontAttributes="Bold"
+        <VerticalStackLayout Spacing="20" Padding="30">
+            <Border BackgroundColor="White"
+                    StrokeShape="RoundRectangle 15"
+                    Padding="20">
+                <Grid ColumnDefinitions="30*, 70*">
+                    <Image Source="https://ird.rmutp.ac.th/wp-content/uploads/msu.png"
+                           Grid.Column="0"
                            HorizontalOptions="Center"
-                           VerticalOptions="Center"/>
-                </Border>
-                <Border Grid.Column="1"
-                        BackgroundColor="#F1F0E8"
-                        Padding="15"
-                        StrokeShape="RoundRectangle 10"
-                        Margin="10,0,0,0">
-                    <Label Text="{Binding FullName, StringFormat='ชื่อนิสิต: {0}'}"
-                           FontSize="16"
+                           VerticalOptions="Center"
+                           WidthRequest="100"
+                           HeightRequest="100"
+                           Aspect="AspectFit"/>
+                    <StackLayout Grid.Column="1"
+                                 HorizontalOptions="Start"
+                                 VerticalOptions="Center"
+                                 Spacing="5">
+                        <Label Text="มหาวิทยาลัยมหาสารคาม"
+                               FontSize="22"
+                               FontAttributes="Bold"
+                               TextColor="#2E4374"/>
+                        <Label Text="ระบบลงทะเบียนเรียน"
+                               FontSize="18"
+                               TextColor="#7C81AD"/>
+                    </StackLayout>
+                </Grid>
+            </Border>
+            <Border BackgroundColor="White"
+                    StrokeShape="RoundRectangle 15"
+                    Padding="20">
+                <Grid ColumnDefinitions="30*, 70*">
+                    <Border Grid.Column="0"
+                            BackgroundColor="#2E4374"
+                            StrokeShape="RoundRectangle 10"
+                            Padding="10">
+                        <Label Text="🏠 หน้าหลัก"
+                               TextColor="White"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                    </Border>
+                    <Label Grid.Column="1"
+                           BackgroundColor="#F1F0E8"
                            TextColor="#2E4374"
                            FontAttributes="Bold"
-                           HorizontalOptions="Start"
-                           VerticalOptions="Center"/>
-                </Border>
-            </Grid>
-
-            <Grid ColumnDefinitions="20*, 80*"
-                  BackgroundColor="White"
-                  RowDefinitions="Auto, *">
+                           Padding="15"
+                           HorizontalOptions="Fill"
+                           VerticalOptions="Center">
+                        <Label.Text>
+                            <MultiBinding StringFormat="รหัสนิสิต {0} นาย {1}">
+                                <Binding Path="CurrentEmail.UserId"/>
+                                <Binding Path="CurrentEmail.Name"/>
+                            </MultiBinding>
+                        </Label.Text>
+                    </Label>
+                </Grid>
+            </Border>
+            <Grid ColumnDefinitions="30*, 70*">
                 <VerticalStackLayout Grid.Column="0"
-                                     Grid.RowSpan="2"
-                                     BackgroundColor="#F1F0E8"
-                                     Padding="10"
-                                     Spacing="15">
+                                     BackgroundColor="White"
+                                     Spacing="15"
+                                     Padding="15">
                     <Button Text="ประวัตินิสิต"
                             BackgroundColor="#7C81AD"
                             TextColor="White"
                             Command="{Binding NavigateToHistoryPageCommand}"
                             CornerRadius="10"
-                            FontAttributes="Bold"/>
+                            FontAttributes="Bold"
+                            HeightRequest="50"/>
                     <Button Text="ผลการลงทะเบียนเรียน"
                             BackgroundColor="#7C81AD"
                             TextColor="White"
                             Command="{Binding NavigateToSummaryPageCommand}"
                             CornerRadius="10"
-                            FontAttributes="Bold"/>
+                            FontAttributes="Bold"
+                            HeightRequest="50"/>
                     <Button Text="ลงทะเบียนเรียน"
                             BackgroundColor="#7C81AD"
                             TextColor="White"
                             Command="{Binding NavigateToRegisterPageCommand}"
                             CornerRadius="10"
-                            FontAttributes="Bold"/>
+                            FontAttributes="Bold"
+                            HeightRequest="50"/>
                     <Button Text="ถอนวิชาเรียน"
                             BackgroundColor="#7C81AD"
                             TextColor="White"
                             Command="{Binding NavigateToRemovePageCommand}"
                             CornerRadius="10"
-                            FontAttributes="Bold"/>
+                            FontAttributes="Bold"
+                            HeightRequest="50"/>
                     <Button Text="ออกจากระบบ"
                             BackgroundColor="#D71313"
                             TextColor="White"
                             Command="{Binding LogoutCommand}"
                             CornerRadius="10"
                             FontAttributes="Bold"
+                            HeightRequest="50"
                             Margin="0,30,0,0"/>
                 </VerticalStackLayout>
-
-                <VerticalStackLayout Grid.Column="1"
-                                     Grid.Row="0"
-                                     Padding="15">
+                <VerticalStackLayout Grid.Column="1" Spacing="20">
                     <Border BackgroundColor="#2E4374"
-                            StrokeShape="RoundRectangle 10"
-                            Padding="10,5"
-                            Margin="0,0,0,15">
+                            StrokeShape="RoundRectangle 15"
+                            Padding="15">
                         <Label Text="ยินดีต้อนรับเข้าสู่ระบบลงทะเบียน"
-                               FontSize="16"
                                TextColor="White"
-                               VerticalOptions="Center"
-                               HorizontalOptions="Center"
-                               FontAttributes="Bold"/>
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"/>
                     </Border>
-                </VerticalStackLayout>
-
-                <VerticalStackLayout Grid.Column="1"
-                                     Grid.Row="1"
-                                     Padding="15"
-                                     HeightRequest="500">
-                    <Border BackgroundColor="#F5F5DC"
-                            Stroke="#7C81AD"
-                            StrokeShape="RoundRectangle 10"
-                            Padding="15"
-                            Margin="0,0,0,15">
-                        <!-- Optional Shadow -->
-                        <Border.Shadow>
-                            <Shadow Brush="Gray"
-                                    Offset="5,5"
-                                    Radius="10"
-                                    Opacity="0.5"/>
-                        </Border.Shadow>
-                        <VerticalStackLayout>
+                    <Border BackgroundColor="White"
+                            StrokeShape="RoundRectangle 15"
+                            Padding="20">
+                        <VerticalStackLayout Spacing="10">
                             <Label Text="ข่าวสารประชาสัมพันธ์"
-                                   FontSize="16"
+                                   FontSize="18"
                                    TextColor="#2E4374"
-                                   FontAttributes="Bold"
-                                   Margin="0,0,0,10"/>
+                                   FontAttributes="Bold"/>
                             <Label Text="• เปิดลงทะเบียนเรียนภาคเรียนที่ 1/2567 ระหว่างวันที่ 25-31 มีนาคม 2567"
-                                   TextColor="#2E4374"
-                                   Margin="0,0,0,5"/>
+                                   TextColor="#7C81AD"/>
                             <Label Text="• การชำระเงินค่าลงทะเบียนเรียน ภายในวันที่ 5 เมษายน 2567"
-                                   TextColor="#2E4374"
-                                   Margin="0,0,0,5"/>
-                            <Label Text="• ประกาศรายชื่อผู้ได้รับทุนการศึกษา ประจำปีการศึกษา 2567"
-                                   TextColor="#2E4374"/>
+                                   TextColor="#7C81AD"/>
                         </VerticalStackLayout>
                     </Border>
-
-                    <Border BackgroundColor="#F5F5DC"
-                            Stroke="#7C81AD"
-                            StrokeShape="RoundRectangle 10"
-                            Padding="15">
-                        <!-- Optional Shadow -->
-                        <Border.Shadow>
-                            <Shadow Brush="Gray"
-                                    Offset="5,5"
-                                    Radius="10"
-                                    Opacity="0.5"/>
-                        </Border.Shadow>
-                        <VerticalStackLayout>
+                    <Border BackgroundColor="White"
+                            StrokeShape="RoundRectangle 15"
+                            Padding="20">
+                        <VerticalStackLayout Spacing="10">
                             <Label Text="ปฏิทินการศึกษา"
-                                   FontSize="16"
+                                   FontSize="18"
                                    TextColor="#2E4374"
-                                   FontAttributes="Bold"
-                                   Margin="0,0,0,10"/>
+                                   FontAttributes="Bold"/>
                             <Label Text="• 25 มี.ค. 2567 - 31 มี.ค. 2567: ลงทะเบียนเรียนภาคเรียนที่ 1/2567"
-                                   TextColor="#2E4374"
-                                   Margin="0,0,0,5"/>
+                                   TextColor="#7C81AD"/>
                             <Label Text="• 5 เม.ย. 2567: วันสุดท้ายของการชำระเงินค่าลงทะเบียน"
-                                   TextColor="#2E4374"
-                                   Margin="0,0,0,5"/>
-                            <Label Text="• 15 พ.ค. 2567: เปิดภาคเรียนที่ 1/2567"
-                                   TextColor="#2E4374"
-                                   Margin="0,0,0,5"/>
-                            <Label Text="• 1 มิ.ย. 2567: วันสุดท้ายของการเพิกถอนรายวิชาที่ได้รับคืนเงินค่าหน่วยกิต"
-                                   TextColor="#2E4374"/>
+                                   TextColor="#7C81AD"/>
                         </VerticalStackLayout>
                     </Border>
                 </VerticalStackLayout>

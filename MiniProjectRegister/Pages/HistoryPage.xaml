@@ -3,11 +3,75 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MiniProjectRegister.Pages.HistoryPage"
              Shell.NavBarIsVisible="False"
-             Title="HistoryPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             BackgroundColor="#FFDEE14C"
+             Title="History Page">
+    <ScrollView>
+        <VerticalStackLayout Padding="20,30,20,20" Spacing="15">
+            <Image Source="{Binding CurrentEmail.ProfileImage}"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start"
+                   WidthRequest="100"
+                   HeightRequest="100"
+                   Aspect="AspectFill"
+                   Margin="0,0,0,20"/>
+            <Label Text="ประวัติด้านการศึกษา"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#2E4374"
+                   Margin="0,0,0,20"/>
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="20"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="{Binding CurrentEmail.UserId, StringFormat='รหัสนิสิต {0}'}"
+                           FontSize="Medium"
+                           TextColor="#2E4374"
+                           HorizontalOptions="Center"/>
+                    <Label Text="{Binding CurrentEmail.Name, StringFormat='คุณ {0}'}"
+                           FontSize="Medium"
+                           TextColor="#2E4374"
+                           HorizontalOptions="Center"/>
+                    <Label Text="{Binding CurrentEmail.Faculty, StringFormat='คณะ {0}'}"
+                           FontSize="Medium"
+                           TextColor="#2E4374"
+                           HorizontalOptions="Center"/>
+                    <Label Text="{Binding CurrentEmail.Department, StringFormat='สาขา {0}'}"
+                           FontSize="Medium"
+                           TextColor="#2E4374"
+                           HorizontalOptions="Center"/>
+                    <Label Text="{Binding CurrentEmail.Year, StringFormat='ปีการศึกษาปัจจุบัน {0}'}"
+                           FontSize="Medium"
+                           TextColor="#2E4374"
+                           HorizontalOptions="Center"/>
+                    <Label Text="{Binding CurrentEmail.PhoneNumber, StringFormat='เบอร์โทรศัพท์ {0}'}"
+                           FontSize="Medium"
+                           TextColor="#2E4374"
+                           HorizontalOptions="Center"/>
+                    <Label Text="{Binding CurrentEmail.Advisor, StringFormat='อาจารย์ที่ปรึกษ {0}'}"
+                           FontSize="Medium"
+                           TextColor="#2E4374"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+            <Label Text="ผลการศึกษา"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#2E4374"
+                   Margin="0,20,0,20"/>
+            <Frame BackgroundColor="White"
+                   CornerRadius="10"
+                   Padding="20"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="{Binding CurrentEmail.Gpa, StringFormat='เกรด {0}'}"
+                           FontSize="Medium"
+                           TextColor="#2E4374"
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

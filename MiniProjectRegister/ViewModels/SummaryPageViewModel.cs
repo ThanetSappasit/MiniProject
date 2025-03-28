@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MauiApp1.Model;
 
 namespace MiniProjectRegister.ViewModels;
@@ -8,39 +9,43 @@ namespace MiniProjectRegister.ViewModels;
 public partial class SummaryPageViewModel : ObservableObject
 {
 	[ObservableProperty]
-    private string email;
-	[ObservableProperty]
+    private string email = string.Empty;
+
+    [ObservableProperty]
     private User currentEmail;
 	[ObservableProperty]
-    private ObservableCollection<Course> courses;
-	[ObservableProperty]
-    private ObservableCollection<Register> registers;
+    private ObservableCollection<Course> courses = new();
+
+    [ObservableProperty]
+    private ObservableCollection<Register> registers = new();
+    [ObservableProperty]
+    private ObservableCollection<TermCourses> termCoursesList = new();
 	public SummaryPageViewModel(string email = "")
 	{
 		Email = email;
-		LoadDataAsync();
+		_ = LoadDataAsync();
 	}
-	async Task LoadDataAsync()
+	private async Task LoadDataAsync()
     {
-        Debug.WriteLine("===== เริ่มโหลดข้อมูล =====");
+        try
+        {
+            var allCourses = await ReadCourseJsonAsync();
+            Courses = new ObservableCollection<Course>(allCourses);
 
-        var allCourses = await ReadCourseJsonAsync();
-        Courses = new ObservableCollection<Course>(allCourses);
-        Debug.WriteLine($"โหลด Courses สำเร็จ! จำนวน: {Courses.Count}");
+            var users = await ReadUserJsonAsync();
+            CurrentEmail = users.FirstOrDefault(u => u.Email == Email);
 
-        var users = await ReadUserJsonAsync();
-        CurrentEmail = users.FirstOrDefault(u => u.Email == Email);
-        Debug.WriteLine(CurrentEmail != null 
-            ? $"พบผู้ใช้ที่มีอีเมล {Email}" 
-            : $"ไม่พบผู้ใช้ที่มีอีเมล {Email}");
+            var allRegisters = await ReadRegisterJsonAsync();
+            Registers = new ObservableCollection<Register>(allRegisters);
 
-        var allRegisters = await ReadRegisterJsonAsync();
-        Registers = new ObservableCollection<Register>(allRegisters);
-        Debug.WriteLine($"โหลด Registers สำเร็จ! จำนวน: {Registers.Count}");
-
-        Debug.WriteLine("===== โหลดข้อมูลเสร็จสิ้น =====");
+            CombineCourses();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[LoadDataAsync] Error: {ex.Message}");
+        }
     }
-	async Task<List<Course>> ReadCourseJsonAsync()
+	private async Task<List<Course>> ReadCourseJsonAsync()
     {
         try
         {
@@ -48,8 +53,7 @@ public partial class SummaryPageViewModel : ObservableObject
             using var reader = new StreamReader(stream);
             var contents = await reader.ReadToEndAsync();
             var courses = Course.FromJson(contents);
-            Debug.WriteLine($"[ReadCourseJsonAsync] อ่านข้อมูลสำเร็จ: {courses.Count} รายวิชา");
-            return courses;
+            return courses ?? new List<Course>();
         }
         catch (Exception ex)
         {
@@ -58,7 +62,7 @@ public partial class SummaryPageViewModel : ObservableObject
         }
     }
 
-    async Task<List<User>> ReadUserJsonAsync()
+    private async Task<List<User>> ReadUserJsonAsync()
     {
         try
         {
@@ -66,8 +70,7 @@ public partial class SummaryPageViewModel : ObservableObject
             using var reader = new StreamReader(stream);
             var contents = await reader.ReadToEndAsync();
             var users = User.FromJson(contents);
-            Debug.WriteLine($"[ReadUserJsonAsync] อ่านข้อมูลสำเร็จ: {users.Count} ผู้ใช้");
-            return users;
+            return users ?? new List<User>();
         }
         catch (Exception ex)
         {
@@ -76,7 +79,7 @@ public partial class SummaryPageViewModel : ObservableObject
         }
     }
 
-    async Task<List<Register>> ReadRegisterJsonAsync()
+    private async Task<List<Register>> ReadRegisterJsonAsync()
     {
         try
         {
@@ -84,13 +87,107 @@ public partial class SummaryPageViewModel : ObservableObject
             using var reader = new StreamReader(stream);
             var contents = await reader.ReadToEndAsync();
             var registers = Register.FromJson(contents);
-            Debug.WriteLine($"[ReadRegisterJsonAsync] อ่านข้อมูลสำเร็จ: {registers.Count} รายการลงทะเบียน");
-            return registers;
+            return registers ?? new List<Register>();
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"[ReadRegisterJsonAsync] Error: {ex.Message}");
             return new List<Register>();
         }
+    }
+    private void CombineCourses()
+    {
+        // Clear existing TermCoursesList
+        TermCoursesList.Clear();
+
+        if (CurrentEmail == null)
+        {
+            Debug.WriteLine("\nCurrentEmail is null.");
+            return;
+        }
+
+        var userRegister = Registers.FirstOrDefault(r => r.UserId == CurrentEmail.UserId);
+        if (userRegister == null)
+        {
+            Debug.WriteLine("\nNo register found for the current user.");
+            return;
+        }
+
+        if (userRegister.Terms == null || !userRegister.Terms.Any())
+        {
+            Debug.WriteLine("  No terms found for the current user.");
+            return;
+        }
+
+        var groupedCourses = new Dictionary<string, List<Course>>();
+        foreach (var term in userRegister.Terms)
+        {
+            // Use Distinct with a custom comparer to remove duplicate courses
+            var termCourses = Courses
+                .Where(course => term.Courses.Contains(course.Courseid))
+                .Distinct(new CourseComparer())
+                .ToList();
+
+            groupedCourses[term.TermTerm] = termCourses;
+        }
+
+        foreach (var group in groupedCourses)
+        {
+            var termCourses = new TermCourses
+            {
+                TermName = group.Key,
+                Courses = new ObservableCollection<Course>(group.Value)
+            };
+            TermCoursesList.Add(termCourses);
+        }
+
+        // Log the final TermCoursesList for debugging
+        Debug.WriteLine("\nFinal TermCoursesList:");
+        foreach (var term in TermCoursesList)
+        {
+            Debug.WriteLine($"Term: {term.TermName}");
+            foreach (var course in term.Courses)
+            {
+                Debug.WriteLine($"  Course ID: {course.Courseid}, Name: {course.Coursename}, Credits: {course.Credits}");
+                Debug.WriteLine($"  Instructor: {course.Instructor}, Year: {course.Year}");
+            }
+        }
+    }
+
+    private class CourseComparer : IEqualityComparer<Course>
+    {
+        public bool Equals(Course x, Course y)
+        {
+            if (ReferenceEquals(x, y)) return true;
+            if (x is null || y is null) return false;
+
+            return x.Courseid == y.Courseid &&
+                   x.Coursename == y.Coursename &&
+                   x.Instructor == y.Instructor &&
+                   x.Credits == y.Credits &&
+                   x.Year == y.Year;
+        }
+
+        public int GetHashCode(Course obj)
+        {
+            if (obj is null) return 0;
+
+            unchecked // Overflow is fine, just wrap
+            {
+                int hash = 17;
+                hash = hash * 23 + (obj.Courseid?.GetHashCode() ?? 0);
+                hash = hash * 23 + (obj.Coursename?.GetHashCode() ?? 0);
+                hash = hash * 23 + (obj.Instructor?.GetHashCode() ?? 0);
+                hash = hash * 23 + obj.Credits.GetHashCode();
+                hash = hash * 23 + obj.Year.GetHashCode();
+                return hash;
+            }
+        }
+    }
+    
+    [RelayCommand]
+    async Task GoBack()
+    {
+        await Shell.Current.Navigation.PopAsync();
     }
 }

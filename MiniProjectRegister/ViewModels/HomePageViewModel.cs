@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using MauiApp1.Model;
 using MiniProjectRegister.Pages;
 using System.Diagnostics;
 
@@ -9,10 +10,43 @@ public partial class HomePageViewModel : ObservableObject
 {
     [ObservableProperty]
     private string email;
+    [ObservableProperty]
+    private User currentEmail;
 
     public HomePageViewModel(string email = "")
     {
         Email = email;
+        LoadDataAsync();
+    }
+    async Task LoadDataAsync()
+    {
+        var users = await ReadUserJsonAsync();
+        CurrentEmail = users.FirstOrDefault(u => u.Email == Email);
+        if (CurrentEmail != null)
+        {
+            Debug.WriteLine($"[LoadDataAsync] CurrentEmail: {CurrentEmail.UserId}");
+        }
+        else
+        {
+            Debug.WriteLine("[LoadDataAsync] CurrentEmail is null");
+        }
+    }
+	async Task<List<User>> ReadUserJsonAsync()
+    {
+        try
+        {
+            using var stream = await FileSystem.OpenAppPackageFileAsync("user.json");
+            using var reader = new StreamReader(stream);
+            var contents = await reader.ReadToEndAsync();
+            var users = User.FromJson(contents);
+            Debug.WriteLine($"[ReadUserJsonAsync] อ่านข้อมูลสำเร็จ: {users.Count} ผู้ใช้");
+            return users;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[ReadUserJsonAsync] Error: {ex.Message}");
+            return new List<User>();
+        }
     }
 
     // เพิ่ม Method สำหรับส่ง Email ไปยังหน้าอื่น

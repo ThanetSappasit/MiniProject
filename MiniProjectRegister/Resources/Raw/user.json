@@ -3,30 +3,70 @@
       "user_id": "U001",
       "name": "Alice Johnson",
       "email": "1",
-      "password": "1" 
+      "password": "1" ,
+      "faculty": "วิศวกรรมศาสตร์",
+      "department": "วิศวกรรมคอมพิวเตอร์",
+      "year": 2,
+      "profileImage": "https://png.pngtree.com/png-vector/20191110/ourmid/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg",
+      "phoneNumber": "0891234566",
+      "gpa": 3.57,
+      "enrollment_year": 2022,
+      "Advisor": "Prof. John Doe"
     },
     {
       "user_id": "U002",
       "name": "Bob Smith",
       "email": "bob.smith@example.com",
-      "password": "hashed_password_002"
+      "password": "hashed_password_002",
+      "faculty": "วิศวกรรมศาสตร์",
+      "department": "วิศวกรรมคอมพิวเตอร์",
+      "year": 2,
+      "profileImage": "https://png.pngtree.com/png-vector/20191110/ourmid/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg",
+      "phoneNumber": "0891234566",
+      "gpa": 3.57,
+      "enrollment_year": 2022,
+      "Advisor": "Prof. John Doe"
     },
     {
       "user_id": "U003",
       "name": "Clara Lee",
       "email": "clara.lee@example.com",
-      "password": "hashed_password_003"
+      "password": "hashed_password_003",
+      "faculty": "วิศวกรรมศาสตร์",
+      "department": "วิศวกรรมคอมพิวเตอร์",
+      "year": 2,
+      "profileImage": "https://png.pngtree.com/png-vector/20191110/ourmid/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg",
+      "phoneNumber": "0891234566",
+      "gpa": 3.57,
+      "enrollment_year": 2022,
+      "Advisor": "Prof. John Doe"
     },
     {
       "user_id": "U004",
       "name": "David Kim",
       "email": "david.kim@example.com",
-      "password": "hashed_password_004"
+      "password": "hashed_password_004",
+      "faculty": "วิศวกรรมศาสตร์",
+      "department": "วิศวกรรมคอมพิวเตอร์",
+      "year": 2,
+      "profileImage": "https://png.pngtree.com/png-vector/20191110/ourmid/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg",
+      "phoneNumber": "0891234566",
+      "gpa": 3.57,
+      "enrollment_year": 2022,
+      "Advisor": "Prof. John Doe"
     },
     {
       "user_id": "U005",
       "name": "Emma Brown",
       "email": "emma.brown@example.com",
-      "password": "hashed_password_005"
+      "password": "hashed_password_005",
+      "faculty": "วิศวกรรมศาสตร์",
+      "department": "วิศวกรรมคอมพิวเตอร์",
+      "year": 2,
+      "profileImage": "https://png.pngtree.com/png-vector/20191110/ourmid/pngtree-avatar-icon-profile-icon-member-login-vector-isolated-png-image_1978396.jpg",
+      "phoneNumber": "0891234566",
+      "gpa": 3.57,
+      "enrollment_year": 2022,
+      "Advisor": "Prof. John Doe"
     }
   ]

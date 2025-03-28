@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MauiApp1.Model;
 
 namespace MiniProjectRegister.ViewModels;
@@ -21,11 +22,6 @@ public partial class HistoryPageViewModel : ObservableObject
 		
         var users = await ReadUserJsonAsync();
         CurrentEmail = users.FirstOrDefault(u => u.Email == Email);
-        Debug.WriteLine(CurrentEmail != null 
-            ? $"พบผู้ใช้ที่มีอีเมล {Email}" 
-            : $"ไม่พบผู้ใช้ที่มีอีเมล {Email}");
-
-        Debug.WriteLine("===== โหลดข้อมูลเสร็จสิ้น =====");
     }
 	async Task<List<User>> ReadUserJsonAsync()
     {
@@ -43,5 +39,10 @@ public partial class HistoryPageViewModel : ObservableObject
             Debug.WriteLine($"[ReadUserJsonAsync] Error: {ex.Message}");
             return new List<User>();
         }
+    }
+    [RelayCommand]
+    async Task GoBack()
+    {
+        await Shell.Current.Navigation.PopAsync();
     }
 }

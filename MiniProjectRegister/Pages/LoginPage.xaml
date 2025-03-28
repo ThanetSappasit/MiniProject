@@ -3,59 +3,52 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MiniProjectRegister.Pages.LoginPage"
              Shell.NavBarIsVisible="False"
-             Title="LoginPage">
+             Title="LoginPage"
+             BackgroundColor="#F5F5DC">
     <ScrollView>
         <Grid RowDefinitions="Auto, *"
-              ColumnDefinitions="*"
-              BackgroundColor="#F5F5DC"
-              Padding="20">
-            <!-- ส่วนหัวของหน้า -->
+              Padding="30">
             <Border Grid.Row="0"
-                    Padding="10"
                     BackgroundColor="White"
+                    StrokeShape="RoundRectangle 15"
                     Margin="0,0,0,30"
-                    StrokeShape="RoundRectangle 10"
-                    Stroke="#DDDDDD">
+                    Padding="20">
                 <Grid ColumnDefinitions="30*, 70*">
-                    <!-- โลโก้ -->
                     <Image Source="https://ird.rmutp.ac.th/wp-content/uploads/msu.png"
                            Grid.Column="0"
                            HorizontalOptions="Center"
                            VerticalOptions="Center"
-                           WidthRequest="80"
-                           HeightRequest="80"/>
-
-                    <!-- ชื่อมหาวิทยาลัย -->
+                           WidthRequest="100"
+                           HeightRequest="100"
+                           Aspect="AspectFit"/>
                     <StackLayout Grid.Column="1"
                                  HorizontalOptions="Start"
-                                 VerticalOptions="Center">
+                                 VerticalOptions="Center"
+                                 Spacing="5">
                         <Label Text="มหาวิทยาลัยมหาสารคาม"
-                               FontSize="20"
+                               FontSize="22"
                                FontAttributes="Bold"
                                TextColor="#2E4374"/>
                         <Label Text="ระบบลงทะเบียนเรียน"
-                               FontSize="16"
+                               FontSize="18"
                                TextColor="#7C81AD"/>
                     </StackLayout>
                 </Grid>
             </Border>
-
-            <!-- ส่วนฟอร์มล็อกอิน -->
             <StackLayout Grid.Row="1"
                          VerticalOptions="Center"
                          HorizontalOptions="Center"
-                         Padding="20"
+                         Spacing="20"
                          WidthRequest="400">
                 <Border Stroke="#2E4374"
                         StrokeThickness="2"
                         StrokeShape="RoundRectangle 20"
-                        Padding="25"
-                        BackgroundColor="White">
+                        BackgroundColor="White"
+                        Padding="30">
                     <VerticalStackLayout Spacing="25">
-                        <!-- หัวข้อ -->
                         <Border BackgroundColor="#2E4374"
                                 StrokeShape="RoundRectangle 10"
-                                Padding="10,5"
+                                Padding="15,10"
                                 Margin="0,0,0,10">
                             <Label Text="เข้าสู่ระบบ"
                                    FontSize="20"
@@ -63,60 +56,46 @@
                                    FontAttributes="Bold"
                                    HorizontalOptions="Center"/>
                         </Border>
-
-                        <!-- ฟอร์มอินพุต -->
-                        <Grid RowDefinitions="Auto, Auto"
-                              RowSpacing="20">
-                            <!-- อีเมล -->
-                            <VerticalStackLayout Grid.Row="0"
-                                                 Spacing="5">
-                                <Label Text="อีเมล"
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="อีเมล"
+                                   TextColor="#2E4374"
+                                   FontAttributes="Bold"/>
+                            <Border Padding="15,10"
+                                    Stroke="#7C81AD"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 10">
+                                <Entry Placeholder="กรุณากรอกอีเมล"
+                                       Text="{Binding Email}"
                                        TextColor="#2E4374"
-                                       FontAttributes="Bold"/>
-                                <Border Padding="15,0"
-                                        Stroke="#7C81AD"
-                                        StrokeThickness="1"
-                                        StrokeShape="RoundRectangle 10">
-                                    <Entry Placeholder="กรุณากรอกอีเมล"
-                                           TextColor="Black"
-                                           Text="{Binding Email}"
-                                           PlaceholderColor="Black"/>
-                                </Border>
-                            </VerticalStackLayout>
-
-                            <!-- รหัสผ่าน -->
-                            <VerticalStackLayout Grid.Row="1"
-                                                 Spacing="5">
-                                <Label Text="รหัสผ่าน"
+                                       PlaceholderColor="#7C81AD"/>
+                            </Border>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="8">
+                            <Label Text="รหัสผ่าน"
+                                   TextColor="#2E4374"
+                                   FontAttributes="Bold"/>
+                            <Border Padding="15,10"
+                                    Stroke="#7C81AD"
+                                    StrokeThickness="1"
+                                    StrokeShape="RoundRectangle 10">
+                                <Entry Placeholder="กรุณากรอกรหัสผ่าน"
+                                       Text="{Binding Password}"
+                                       IsPassword="True"
                                        TextColor="#2E4374"
-                                       FontAttributes="Bold"/>
-                                <Border Padding="15,0"
-                                        Stroke="#7C81AD"
-                                        StrokeThickness="1"
-                                        StrokeShape="RoundRectangle 10">
-                                    <Entry Placeholder="กรุณากรอกรหัสผ่าน"
-                                           TextColor="Black"
-                                           Text="{Binding Password}"
-                                           PlaceholderColor="Black"
-                                           IsPassword="True"/>
-                                </Border>
-                            </VerticalStackLayout>
-                        </Grid>
-
-                        <!-- ปุ่มล็อกอิน -->
+                                       PlaceholderColor="#7C81AD"/>
+                            </Border>
+                        </VerticalStackLayout>
                         <Button Text="เข้าสู่ระบบ"
-                                WidthRequest="200"
-                                HeightRequest="50"
                                 BackgroundColor="#2E4374"
                                 TextColor="White"
                                 FontAttributes="Bold"
                                 Command="{Binding LoginCommand}"
                                 CornerRadius="25"
+                                HeightRequest="50"
+                                WidthRequest="250"
                                 HorizontalOptions="Center"/>
-
-                        <!-- ลิงก์ช่วยเหลือ -->
                         <HorizontalStackLayout HorizontalOptions="Center"
-                                               Spacing="90">
+                                               Spacing="50">
                             <Label Text="ลืมรหัสผ่าน?"
                                    TextColor="#7C81AD"
                                    FontSize="14"
