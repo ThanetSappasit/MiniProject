@@ -49,6 +49,11 @@
                                FontSize="16"
                                HorizontalOptions="Center"
                                TextColor="#4A5568"/>
+                        <Image Source="{Binding CurrentEmail.ProfileImage}"
+                               Aspect="AspectFill"
+                               HeightRequest="100"
+                               WidthRequest="100"
+                               HorizontalOptions="Center"/>
                     </VerticalStackLayout>
                 </Border>
 

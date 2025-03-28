@@ -3,75 +3,197 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MiniProjectRegister.Pages.HistoryPage"
              Shell.NavBarIsVisible="False"
-             BackgroundColor="#FFDEE14C"
+             BackgroundColor="#F5F7FA"
              Title="History Page">
     <ScrollView>
-        <VerticalStackLayout Padding="20,30,20,20" Spacing="15">
-            <Image Source="{Binding CurrentEmail.ProfileImage}"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Start"
-                   WidthRequest="100"
-                   HeightRequest="100"
-                   Aspect="AspectFill"
-                   Margin="0,0,0,20"/>
-            <Label Text="ประวัติด้านการศึกษา"
-                   FontSize="Large"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   TextColor="#2E4374"
-                   Margin="0,0,0,20"/>
-            <Frame BackgroundColor="White"
-                   CornerRadius="10"
-                   Padding="20"
-                   HasShadow="True">
-                <VerticalStackLayout Spacing="12">
-                    <Label Text="{Binding CurrentEmail.UserId, StringFormat='รหัสนิสิต {0}'}"
-                           FontSize="Medium"
-                           TextColor="#2E4374"
-                           HorizontalOptions="Center"/>
-                    <Label Text="{Binding CurrentEmail.Name, StringFormat='คุณ {0}'}"
-                           FontSize="Medium"
-                           TextColor="#2E4374"
-                           HorizontalOptions="Center"/>
-                    <Label Text="{Binding CurrentEmail.Faculty, StringFormat='คณะ {0}'}"
-                           FontSize="Medium"
-                           TextColor="#2E4374"
-                           HorizontalOptions="Center"/>
-                    <Label Text="{Binding CurrentEmail.Department, StringFormat='สาขา {0}'}"
-                           FontSize="Medium"
-                           TextColor="#2E4374"
-                           HorizontalOptions="Center"/>
-                    <Label Text="{Binding CurrentEmail.Year, StringFormat='ปีการศึกษาปัจจุบัน {0}'}"
-                           FontSize="Medium"
-                           TextColor="#2E4374"
-                           HorizontalOptions="Center"/>
-                    <Label Text="{Binding CurrentEmail.PhoneNumber, StringFormat='เบอร์โทรศัพท์ {0}'}"
-                           FontSize="Medium"
-                           TextColor="#2E4374"
-                           HorizontalOptions="Center"/>
-                    <Label Text="{Binding CurrentEmail.Advisor, StringFormat='อาจารย์ที่ปรึกษ {0}'}"
-                           FontSize="Medium"
-                           TextColor="#2E4374"
-                           HorizontalOptions="Center"/>
+        <VerticalStackLayout Padding="20"
+                             Spacing="25">
+
+            <!-- Header Section -->
+            <Border StrokeShape="RoundRectangle 20"
+                    BackgroundColor="White"
+                    Padding="15"
+                    Margin="0,0,0,25">
+                <Grid ColumnDefinitions="Auto,*"
+                      ColumnSpacing="20">
+                    <Image Grid.Column="0"
+                           Source="https://ird.rmutp.ac.th/wp-content/uploads/msu.png"
+                           WidthRequest="90"
+                           HeightRequest="90"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"/>
+                    <StackLayout Grid.Column="1"
+                                VerticalOptions="Center"
+                                Spacing="5">
+                        <Label Text="มหาวิทยาลัยมหาสารคาม"
+                               FontSize="22"
+                               FontAttributes="Bold"
+                               TextColor="#1E3A8A"/>
+                        <Label Text="ระบบลงทะเบียนเรียน"
+                               FontSize="16"
+                               TextColor="#64748B"
+                               FontAttributes="Italic"/>
+                    </StackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Back Button -->
+            <Button Text="← กลับ"
+                    Command="{Binding GoBackCommand}"
+                    HorizontalOptions="Start"
+                    BackgroundColor="#3B82F6"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    FontSize="16"
+                    WidthRequest="120"
+                    HeightRequest="45"
+                    CornerRadius="12"
+                    Margin="0,0,0,25"/>
+
+            <!-- Student Information -->
+            <Border StrokeShape="RoundRectangle 20"
+                    BackgroundColor="White"
+                    Stroke="#1E3A8A"
+                    StrokeThickness="1"
+                    Padding="25"
+                    Margin="0,0,0,25">
+                <Grid ColumnDefinitions="Auto,*"
+                      ColumnSpacing="25"
+                      RowSpacing="20">
+                    <!-- Left Column: Profile Image and ID -->
+                    <VerticalStackLayout Grid.Column="0"
+                                       Spacing="20"
+                                       HorizontalOptions="Center">
+                        <Border StrokeShape="RoundRectangle 15"
+                                Stroke="#1E3A8A"
+                                StrokeThickness="2"
+                                BackgroundColor="#EFF6FF"
+                                Padding="5">
+                            <Image Source="{Binding CurrentEmail.ProfileImage}"
+                                   HeightRequest="130"
+                                   WidthRequest="130"
+                                   Aspect="AspectFill"/>
+                        </Border>
+                        <Label Text="{Binding CurrentEmail.UserId}"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="#1E3A8A"
+                               HorizontalOptions="Center"
+                               Padding="8"/>
+                    </VerticalStackLayout>
+
+                    <!-- Right Column: Student Details -->
+                    <VerticalStackLayout Grid.Column="1"
+                                       Spacing="20">
+                        <Border BackgroundColor="#1E3A8A"
+                                StrokeShape="RoundRectangle 12"
+                                Padding="12">
+                            <Label Text="ข้อมูลประวัตินิสิต"
+                                   FontSize="20"
+                                   TextColor="White"
+                                   HorizontalOptions="Center"
+                                   FontAttributes="Bold"/>
+                        </Border>
+
+                        <Grid ColumnDefinitions="Auto,*"
+                              ColumnSpacing="20"
+                              RowSpacing="12">
+                            <VerticalStackLayout Grid.Column="0" Spacing="12">
+                                <Label Text="ชื่อนิสิต:"
+                                       FontAttributes="Bold"
+                                       TextColor="#1E3A8A"
+                                       FontSize="16"/>
+                                <Label Text="คณะ:"
+                                       FontAttributes="Bold"
+                                       TextColor="#1E3A8A"
+                                       FontSize="16"/>
+                                <Label Text="ภาควิชา:"
+                                       FontAttributes="Bold"
+                                       TextColor="#1E3A8A"
+                                       FontSize="16"/>
+                                <Label Text="ชั้นปี:"
+                                       FontAttributes="Bold"
+                                       TextColor="#1E3A8A"
+                                       FontSize="16"/>
+                                <Label Text="เบอร์โทรศัพท์:"
+                                       FontAttributes="Bold"
+                                       TextColor="#1E3A8A"
+                                       FontSize="16"/>
+                                <Label Text="อาจารย์ที่ปรึกษา:"
+                                       FontAttributes="Bold"
+                                       TextColor="#1E3A8A"
+                                       FontSize="16"/>
+                                <Label Text="ปีที่เข้าเรียน:"
+                                       FontAttributes="Bold"
+                                       TextColor="#1E3A8A"
+                                       FontSize="16"/>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="12">
+                                <Label Text="{Binding CurrentEmail.UserId}" 
+                                       TextColor="#475569"
+                                       FontSize="16"/>
+                                <Label Text="{Binding CurrentEmail.Faculty}" 
+                                       TextColor="#475569"
+                                       FontSize="16"/>
+                                <Label Text="{Binding CurrentEmail.Department}" 
+                                       TextColor="#475569"
+                                       FontSize="16"/>
+                                <Label Text="{Binding CurrentEmail.Year}" 
+                                       TextColor="#475569"
+                                       FontSize="16"/>
+                                <Label Text="{Binding CurrentEmail.PhoneNumber}" 
+                                       TextColor="#475569"
+                                       FontSize="16"/>
+                                <Label Text="{Binding CurrentEmail.Advisor}" 
+                                       TextColor="#475569"
+                                       FontSize="16"/>
+                                <Label Text="{Binding CurrentEmail.EnrollmentYear}" 
+                                       TextColor="#475569"
+                                       FontSize="16"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Grid>
+            </Border>
+
+            <!-- Academic Results -->
+            <Border StrokeShape="RoundRectangle 20"
+                    BackgroundColor="White"
+                    Stroke="#1E3A8A"
+                    StrokeThickness="1"
+                    Padding="25">
+                <VerticalStackLayout Spacing="20">
+                    <Border BackgroundColor="#1E3A8A"
+                            StrokeShape="RoundRectangle 12"
+                            Padding="12">
+                        <Label Text="ผลการศึกษา"
+                               FontSize="20"
+                               TextColor="White"
+                               HorizontalOptions="Center"
+                               FontAttributes="Bold"/>
+                    </Border>
+
+                    <Grid ColumnDefinitions="Auto,*"
+                          ColumnSpacing="20">
+                        <Label Grid.Column="0"
+                               Text="เกรดเฉลี่ย:"
+                               FontAttributes="Bold"
+                               TextColor="#1E3A8A"
+                               FontSize="16"
+                               VerticalOptions="Center"/>
+                        <Border Grid.Column="1"
+                                StrokeShape="RoundRectangle 8"
+                                Padding="12"
+                                HorizontalOptions="Start">
+                            <Label Text="{Binding CurrentEmail.Gpa}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#1E40AF"/>
+                        </Border>
+                    </Grid>
                 </VerticalStackLayout>
-            </Frame>
-            <Label Text="ผลการศึกษา"
-                   FontSize="Large"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center"
-                   TextColor="#2E4374"
-                   Margin="0,20,0,20"/>
-            <Frame BackgroundColor="White"
-                   CornerRadius="10"
-                   Padding="20"
-                   HasShadow="True">
-                <VerticalStackLayout Spacing="10">
-                    <Label Text="{Binding CurrentEmail.Gpa, StringFormat='เกรด {0}'}"
-                           FontSize="Medium"
-                           TextColor="#2E4374"
-                           HorizontalOptions="Center"/>
-                </VerticalStackLayout>
-            </Frame>
+            </Border>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
